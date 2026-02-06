@@ -25,16 +25,16 @@
       <a class="brand" href="#top" aria-label="Inicio">
         <!-- UPDATED: Logo (SVG + fallback PNG) -->
         <picture class="brand-mark" aria-hidden="true">
-          <source srcset="assets/rocio-data-analytics-logo.svg" type="image/svg+xml" />
-          <img
-            src="assets/rocio-data-analytics-logo.png"
-            alt=""
-            width="28"
-            height="28"
-            loading="eager"
-            decoding="async"
-          />
-        </picture>
+  <source srcset="assets/rocio-data-analytics-logo.svg" type="image/svg+xml" />
+  <img
+    src="assets/rocio-data-analytics-logo.png"
+    alt=""
+    width="48"
+    height="48"
+    loading="eager"
+    decoding="async"
+  />
+</picture>
 
         <span>Rocío Pérez</span>
       </a>
@@ -115,30 +115,8 @@
           </p>
         </header>
 
-        <div class="toolbar" role="region" aria-label="Filtros de proyectos">
-          <label class="field">
-            <span class="field-label">Buscar</span>
-            <input id="searchInput" type="search" placeholder="Ej.: diabetes, ETL, Excel..." autocomplete="off" />
-          </label>
-
-          <label class="field">
-            <span class="field-label">Orden</span>
-            <select id="sortSelect">
-              <option value="pinned">Destacados</option>
-              <option value="updated">Más recientes</option>
-              <option value="stars">Más estrellas</option>
-              <option value="name">Nombre</option>
-            </select>
-          </label>
-        </div>
-
-        <div id="status" class="status" aria-live="polite"></div>
-
         <div id="projectsGrid" class="grid" aria-label="Listado de proyectos"></div>
 
-        <p class="hint">
-          Consejo: abre un repo y mira el README. Está pensado para que una persona no técnica también pueda seguir el hilo.
-        </p>
       </div>
     </section>
 
@@ -266,23 +244,19 @@
             Si buscas a alguien con base técnica y obsesión sana por la claridad, aquí estoy.
           </p>
         </header>
+       <div class="contact-row">
+  <a class="btn btn-primary" href="https://www.linkedin.com/in/rperezlopez" target="_blank" rel="noreferrer noopener">
+    LinkedIn
+  </a>
 
-        <div class="contact-row">
-          <a class="btn btn-primary" href="https://www.linkedin.com/in/rperezlopez" target="_blank" rel="noreferrer noopener">
-            LinkedIn
-          </a>
-          <a class="btn btn-ghost" href="mailto:rociointhecloud@gmail.com">
-            Email
-          </a>
-          <a class="btn btn-ghost" href="https://github.com/" target="_blank" rel="noreferrer noopener" id="githubLink">
-            GitHub
-          </a>
-        </div>
+  <a class="btn btn-ghost" href="mailto:rociointhecloud@gmail.com">
+    Email
+  </a>
 
-        <p class="footnote">
-          <span class="muted">Tip:</span> este portfolio se actualiza solo con tus repos públicos. Publica → refresh → listo.
-        </p>
-      </div>
+  <a class="btn btn-ghost" href="https://github.com/Rociointhecloud" target="_blank" rel="noreferrer noopener">
+    GitHub
+  </a>
+</div>
     </section>
   </main>
 
