@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Portfolio de Rocío Pérez — Data · Health · Impact. Datos claros, útiles y accesibles para decisiones reales." />
+  <title>Rocío Pérez | Data · Health · Impact</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- UPDATED: Favicons -->
+  <link rel="icon" href="assets/rocio-data-analytics-logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/rocio-data-analytics-logo.png" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="brand" href="#top" aria-label="Inicio">
+        <!-- UPDATED: Logo (SVG + fallback PNG) -->
+        <picture class="brand-mark" aria-hidden="true">
+          <source srcset="assets/rocio-data-analytics-logo.svg" type="image/svg+xml" />
+          <img
+            src="assets/rocio-data-analytics-logo.png"
+            alt=""
+            width="28"
+            height="28"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+
+        <span>Rocío Pérez</span>
+      </a>
+
+      <div class="nav-actions">
+        <a class="nav-link" href="#proyectos">Proyectos</a>
+        <a class="nav-link" href="#historia">Historia</a>
+        <a class="nav-link" href="#aprendizaje">Aprendizaje</a>
+        <a class="nav-link" href="#contacto">Contacto</a>
+
+        <button id="modeToggle" class="btn btn-ghost" type="button" aria-pressed="false">
+          Modo: Recruiter
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="top" class="section hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <p class="eyebrow">Data · Health · Impact</p>
+          <h1 class="h1">
+            Los datos solo tienen valor cuando <span class="accent">cualquier persona</span> puede entenderlos.
+          </h1>
+          <p class="lead">
+            Hago la información clara, útil y accesible: para personas no técnicas, para equipos técnicos,
+            y para quienes suelen quedarse fuera (por diseño, por tiempo o por barreras).
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+            <a class="btn btn-ghost" href="#contacto">Hablemos</a>
+          </div>
+
+          <ul class="quick-facts" aria-label="Resumen rápido">
+            <li><span class="pill">Análisis reproducible</span></li>
+            <li><span class="pill">Dashboards que se entienden</span></li>
+            <li><span class="pill">Storytelling con ética</span></li>
+            <li><span class="pill">Salud, educación, impacto</span></li>
+          </ul>
+        </div>
+
+        <div class="hero-right">
+          <!-- Tu GIF/imagen de identidad visual -->
+          <figure class="hero-figure">
+            <img
+              src="https://github.com/user-attachments/assets/61f038aa-b870-4502-9521-01e7d8fd53a1"
+              alt="Banner animado: Rocío Pérez — Data · Health · Impact"
+              loading="eager"
+              decoding="async"
+            />
+            <figcaption class="sr-only">
+              Identidad visual de Rocío Pérez
+            </figcaption>
+          </figure>
+
+          <div class="hero-card" role="note" aria-label="Nota de intención">
+            <h2 class="h3">Mi norte</h2>
+            <p>
+              Si un insight no se puede explicar sin jerga, todavía no está listo.
+              Mi trabajo empieza cuando el análisis termina: <strong>traducir</strong> para decidir.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos" class="section">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="h2">Proyectos (auto-cargados desde GitHub)</h2>
+          <p class="subhead">
+            Aquí no hay “proyectos bonitos”: hay decisiones, contexto, y resultados explicables.
+            Puedes abrir el repo, ver commits, notebooks y README.
+          </p>
+        </header>
+
+        <div class="toolbar" role="region" aria-label="Filtros de proyectos">
+          <label class="field">
+            <span class="field-label">Buscar</span>
+            <input id="searchInput" type="search" placeholder="Ej.: diabetes, ETL, Excel..." autocomplete="off" />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Orden</span>
+            <select id="sortSelect">
+              <option value="pinned">Destacados</option>
+              <option value="updated">Más recientes</option>
+              <option value="stars">Más estrellas</option>
+              <option value="name">Nombre</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="status" class="status" aria-live="polite"></div>
+
+        <div id="projectsGrid" class="grid" aria-label="Listado de proyectos"></div>
+
+        <p class="hint">
+          Consejo: abre un repo y mira el README. Está pensado para que una persona no técnica también pueda seguir el hilo.
+        </p>
+      </div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section id="historia" class="section alt">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="h2">Historia (sin dramatismo, con método)</h2>
+          <p class="subhead">
+            Me gusta lo complejo… pero no me gusta hacerlo complicado.
+            Así que construyo puentes entre datos y personas.
+          </p>
+        </header>
+
+        <div class="story-grid">
+          <article class="card">
+            <h3 class="h3">Situación</h3>
+            <p>
+              En salud, bienestar o impacto social, un gráfico mal explicado no es “solo un gráfico”.
+              Puede convertirse en una decisión equivocada o en una oportunidad perdida.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="h3">Acción</h3>
+            <p>
+              Por eso trabajo con un enfoque claro: limpieza rigurosa, análisis defendible, y visualizaciones
+              pensadas para quien decide (aunque no programe).
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="h3">Beneficio</h3>
+            <p>
+              Resultado: insights accionables, comunicación honesta (sin prometer magia), y entregables que se entienden
+              en una reunión real, con tiempo real.
+            </p>
+          </article>
+        </div>
+
+        <div class="quote" role="note" aria-label="Frase de marca personal">
+          <p>
+            <strong>Accesible</strong> no significa “más simple”.
+            Significa “más justo”: diseño, lenguaje y evidencia al servicio de más personas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- APRENDIZAJE -->
+    <section id="aprendizaje" class="section">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="h2">Lo que estoy aprendiendo (y cómo lo convierto en valor)</h2>
+          <p class="subhead">
+            En mi bootcamp entreno técnica + forma de trabajar: organización, documentación y foco en utilidad.
+          </p>
+        </header>
+
+        <ol class="timeline" aria-label="Ruta de aprendizaje">
+          <li class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <h3 class="h3">Limpieza de datos que no maquilla</h3>
+              <p>
+                Nulos, duplicados, inconsistencias, outliers… y sobre todo: <strong>contexto</strong>.
+                “Garbage in, garbage out”, pero con criterio, no con tijeras.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <h3 class="h3">ETL con mentalidad de producto</h3>
+              <p>
+                Extraer, transformar, cargar… y dejarlo listo para que otra persona lo ejecute sin pedirte permiso:
+                estructura, .env.example, requirements, y README útil.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <h3 class="h3">Dashboards sobrios, claros y eficientes</h3>
+              <p>
+                Prefiero un dashboard que ahorre 30 minutos a un equipo cada semana,
+                antes que uno espectacular que nadie usa.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <h3 class="h3">Trabajo real en equipo (Scrum)</h3>
+              <p>
+                Roles, issues, ramas, entregables, iteración. En datos también se trabaja con método:
+                <strong>no basta con que funcione</strong>.
+              </p>
+            </div>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <h3 class="h3">Storytelling y demos</h3>
+              <p>
+                Aprendo a convertir análisis en algo usable (por ejemplo con apps tipo demo),
+                sin confundir “demo” con “producción”, y siendo honesta con límites y supuestos.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="section alt">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="h2">Contacto</h2>
+          <p class="subhead">
+            Si buscas a alguien con base técnica y obsesión sana por la claridad, aquí estoy.
+          </p>
+        </header>
+
+        <div class="contact-row">
+          <a class="btn btn-primary" href="https://www.linkedin.com/in/rperezlopez" target="_blank" rel="noreferrer noopener">
+            LinkedIn
+          </a>
+          <a class="btn btn-ghost" href="mailto:rociointhecloud@gmail.com">
+            Email
+          </a>
+          <a class="btn btn-ghost" href="https://github.com/" target="_blank" rel="noreferrer noopener" id="githubLink">
+            GitHub
+          </a>
+        </div>
+
+        <p class="footnote">
+          <span class="muted">Tip:</span> este portfolio se actualiza solo con tus repos públicos. Publica → refresh → listo.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="muted">© <span id="year"></span> Rocío Pérez — Data · Health · Impact</p>
+      <a class="muted" href="#top">Volver arriba</a>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
