@@ -11,24 +11,24 @@ const CONFIG = {
   ],
   projectNarratives: {
     "happiness-population-internet-data-cleaning": {
-      why: "Cuando mezclas fuentes (felicidad, población, internet), el riesgo no es el análisis: es la comparación injusta.",
-      what: "Limpieza e integración (2019) con Python/pandas. Normalización de formatos, consistencia y dataset listo para análisis.",
-      outcome: "Dataset coherente para explorar relaciones sin trampas por definiciones o escalas distintas."
+      why: "Cruzar fuentes suena fácil… hasta que comparas cosas que no son comparables y te crees un cuento.",
+      what: "Integré datasets (2019) con pandas: normalicé formatos, unifiqué definiciones y dejé el proceso repetible.",
+      outcome: "Dataset listo para explorar relaciones sin trampas de escalas, unidades o nombres bonitos."
     },
     "digital-wellness-etl-pipeline": {
-      why: "Un dashboard solo sirve si el pipeline es fiable y el resultado se entiende sin necesitar a quien lo construyó.",
-      what: "Proyecto en equipo: MySQL → Python → Excel. Rol: Product Owner. Entrega orientada a uso real y accesibilidad.",
-      outcome: "Pipeline reproducible + dashboard utilizable para analizar hábitos digitales, sueño, estrés y bienestar."
+      why: "Un dashboard no vale si el pipeline es frágil o si solo lo entiende quien lo montó.",
+      what: "Proyecto en equipo: MySQL → Python → Excel. Como PO, forcé claridad: qué métricas importan, cómo se calculan y qué límites tienen.",
+      outcome: "Pipeline reproducible + dashboard utilizable para hábitos digitales (sueño/estrés/bienestar) sin depender del autor."
     },
     "clinical-diabetes-risk-glp1-analysis": {
-      why: "En salud, la interpretabilidad no es un extra: es parte de la responsabilidad.",
-      what: "EDA end-to-end + modelado estadístico interpretable sobre riesgo de diabetes y tendencias de dispensación GLP-1 (NHS).",
-      outcome: "Resultados defendibles y explicables: foco en señales útiles, supuestos claros y límites bien contados."
+      why: "En salud, “me da igual el porqué” no existe: si no se entiende, se usa mal.",
+      what: "EDA + análisis estadístico interpretable con datos NHS: señales, supuestos y sesgos visibles desde el README.",
+      outcome: "Conclusiones defendibles: qué parece estar pasando, qué no puedo afirmar y qué investigaría después."
     },
     "kiva-microloan-dashboard-excel": {
-      why: "Excel bien usado sigue siendo una herramienta potentísima cuando el objetivo es decidir rápido.",
-      what: "Dashboard (42k+ micropréstamos) con limpieza en Power Query y análisis por sector, país y año.",
-      outcome: "Lectura ágil del portfolio de préstamos: patrones por geografía y temática, listo para conversación de negocio."
+      why: "Excel bien hecho no es nostalgia: es velocidad con orden cuando hay que decidir sin montar un sistema entero.",
+      what: "Power Query + dashboard sobre 42k+ micropréstamos: limpieza, segmentación y KPIs con lectura rápida.",
+      outcome: "Conversación de negocio lista: patrones por país/sector/año sin perderte en 20 gráficos."
     }
   }
 };
@@ -36,7 +36,7 @@ const CONFIG = {
 /* =========================
    HELPERS
 ========================= */
-const $ = (sel) => document.querySelector(sel);
+const $ = (sel, root = document) => root.querySelector(sel);
 
 function escapeHtml(str = "") {
   return String(str)
@@ -51,6 +51,29 @@ function formatDate(iso) {
   if (!iso) return "—";
   const d = new Date(iso);
   return d.toLocaleDateString("es-ES", { year: "numeric", month: "short", day: "2-digit" });
+}
+
+function safeText(text, fallback = "—") {
+  const t = String(text ?? "").trim();
+  return t ? t : fallback;
+}
+
+function detectTags(text) {
+  const hay = text.toLowerCase();
+  const tags = [];
+
+  if (/\betl\b/.test(hay)) tags.push("ETL");
+  if (/\bdashboard\b/.test(hay)) tags.push("Dashboard");
+  if (/\bexcel\b/.test(hay)) tags.push("Excel");
+
+  // Evita el "power" genérico: solo etiquetas si hay coincidencia real
+  if (hay.includes("power query")) tags.push("Power Query");
+  if (hay.includes("power bi") || /\bpbi\b/.test(hay)) tags.push("Power BI");
+
+  if (hay.includes("diabetes") || hay.includes("clinical") || hay.includes("nhs")) tags.push("Salud");
+  if (hay.includes("kiva") || hay.includes("microloan")) tags.push("Impacto");
+
+  return tags;
 }
 
 /* =========================
@@ -110,37 +133,51 @@ async function loadRepos() {
 ========================= */
 function repoTags(repo) {
   const tags = [];
+
+  // Lenguaje (primero)
   if (repo.language && repo.language !== "—") tags.push({ label: repo.language, kind: "brand" });
 
-  const hay = `${repo.name} ${repo.description}`.toLowerCase();
-  if (hay.includes("etl")) tags.push({ label: "ETL", kind: "" });
-  if (hay.includes("dashboard")) tags.push({ label: "Dashboard", kind: "" });
-  if (hay.includes("excel")) tags.push({ label: "Excel", kind: "" });
-  if (hay.includes("power")) tags.push({ label: "Power Query/BI", kind: "" });
-  if (hay.includes("diabetes") || hay.includes("clinical") || hay.includes("nhs")) tags.push({ label: "Salud", kind: "" });
-  if (hay.includes("kiva") || hay.includes("microloan")) tags.push({ label: "Impacto", kind: "" });
+  // Heurísticas por nombre/desc
+  const hay = `${repo.name} ${repo.description}`.trim();
+  const detected = detectTags(hay);
 
+  detected.forEach((label) => tags.push({ label, kind: "" }));
+
+  // Limita a 4 max (incluye lenguaje)
   return tags.slice(0, 4);
 }
 
 function narrativeFor(repoName) {
   return CONFIG.projectNarratives[repoName] || {
-    why: "¿Por qué importa? Porque un insight solo vale si alguien puede usarlo para decidir.",
-    what: "¿Qué hice? Limpieza, análisis y documentación orientada a uso real.",
-    outcome: "¿Resultado? Una entrega defendible, reproducible y comprensible."
+    why: "Importa porque si el dato no se entiende, se toma una mala decisión con mucha seguridad.",
+    what: "Limpieza, análisis y decisiones anotadas para que otra persona pueda continuar sin depender de mí.",
+    outcome: "Entrega usable: contexto, límites claros y resultado defendible."
   };
 }
 
-function renderRepoCard(repo) {
+function renderRepoCard(repo, index) {
   const n = narrativeFor(repo.name);
   const tags = repoTags(repo);
-
-  const tagsHtml = tags.map((t) => {
-    const cls = `tag ${t.kind === "brand" ? "brand" : ""}`.trim();
-    return `<span class="${cls}">${escapeHtml(t.label)}</span>`;
-  }).join("");
-
   const updated = formatDate(repo.updated_at);
+
+  // ids estables para accesibilidad (sin tocar HTML/CSS)
+  const detailsId = `details-${index}-${repo.name}`.replace(/[^a-zA-Z0-9-_]/g, "");
+
+  const tagsHtml = tags
+    .map((t) => {
+      const cls = `tag ${t.kind === "brand" ? "brand" : ""}`.trim();
+      return `<span class="${cls}">${escapeHtml(t.label)}</span>`;
+    })
+    .join("");
+
+  const desc = safeText(
+    repo.description,
+    "Proyecto en progreso. Entra al repo para ver contexto, decisiones y resultado."
+  );
+
+  const demoBtn = repo.homepage
+    ? `<a class="btn btn-ghost" href="${escapeHtml(repo.homepage)}" target="_blank" rel="noreferrer noopener">Demo</a>`
+    : "";
 
   return `
     <article class="card" tabindex="0" aria-label="Proyecto ${escapeHtml(repo.name)}">
@@ -159,15 +196,20 @@ function renderRepoCard(repo) {
         </div>
       </div>
 
-      <p class="card-desc">${escapeHtml(repo.description || "Proyecto en progreso. Entra al repo para ver el contexto, el método y el resultado.")}</p>
+      <p class="card-desc">${escapeHtml(desc)}</p>
 
       <div class="card-actions">
         <a class="btn btn-primary" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noreferrer noopener">Ver repo</a>
-        ${repo.homepage ? `<a class="btn btn-ghost" href="${escapeHtml(repo.homepage)}" target="_blank" rel="noreferrer noopener">Demo</a>` : ""}
-        <button class="btn btn-ghost js-details" type="button" aria-expanded="false">Ver enfoque</button>
+        ${demoBtn}
+        <button class="btn btn-ghost js-details"
+                type="button"
+                aria-expanded="false"
+                aria-controls="${escapeHtml(detailsId)}">
+          Ver decisiones
+        </button>
       </div>
 
-      <div class="details" hidden>
+      <div class="details" id="${escapeHtml(detailsId)}" hidden>
         <div class="recruiter-only">
           <h4>Lectura rápida</h4>
           <p class="mini"><strong>Por qué importa:</strong> ${escapeHtml(n.why)}</p>
@@ -176,8 +218,11 @@ function renderRepoCard(repo) {
         </div>
 
         <div class="tech-only">
-          <h4>Notas técnicas (en claro)</h4>
-          <p class="mini">En el repo verás estructura, limpieza/transformaciones, decisiones y un README pensado para seguir el hilo.</p>
+          <h4>Qué mirar si evalúas rápido</h4>
+          <p class="mini">
+            README con contexto, decisiones y límites. Estructura limpia del repo, pasos reproducibles y —si aplica—
+            demo/artefactos para validar sin instalar nada raro.
+          </p>
         </div>
       </div>
     </article>
@@ -188,18 +233,34 @@ function wireCardInteractions(root) {
   root.querySelectorAll(".js-details").forEach((btn) => {
     btn.addEventListener("click", () => {
       const card = btn.closest(".card");
-      const details = card.querySelector(".details");
+      const details = $(".details", card);
       const isOpen = !details.hasAttribute("hidden");
 
       if (isOpen) {
         details.setAttribute("hidden", "");
         btn.setAttribute("aria-expanded", "false");
-        btn.textContent = "Ver enfoque";
+        btn.textContent = "Ver decisiones";
       } else {
         details.removeAttribute("hidden");
         btn.setAttribute("aria-expanded", "true");
-        btn.textContent = "Ocultar enfoque";
+        btn.textContent = "Ocultar decisiones";
       }
+    });
+  });
+
+  // Teclado: Enter/Espacio sobre la tarjeta abre el panel (sin interferir con links/botones)
+  root.querySelectorAll(".card").forEach((card) => {
+    card.addEventListener("keydown", (e) => {
+      const isActivation = e.key === "Enter" || e.key === " ";
+      if (!isActivation) return;
+
+      const target = e.target;
+      const isInteractive = target.closest("a, button, input, select, textarea");
+      if (isInteractive) return;
+
+      e.preventDefault();
+      const btn = $(".js-details", card);
+      if (btn) btn.click();
     });
   });
 }
@@ -218,7 +279,7 @@ function renderProjects(repos) {
     return;
   }
 
-  grid.innerHTML = repos.map(renderRepoCard).join("");
+  grid.innerHTML = repos.map((r, i) => renderRepoCard(r, i)).join("");
   wireCardInteractions(grid);
 }
 
