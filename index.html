@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Portfolio de Rocío Pérez — Data · Health · Impact. Datos claros, útiles y accesibles para decisiones reales." />
+  <meta name="description" content="Portfolio de Rocío Pérez — Data · Health · Impact. Ordeno datos imperfectos para que negocio y equipo técnico puedan moverse sin dudas." />
   <title>Rocío Pérez | Data · Health · Impact</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,14 +14,18 @@
 
   <link rel="icon" href="assets/rocio-data-analytics-logo.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/rocio-data-analytics-logo.png" />
+
+  <style>
+    :target { scroll-margin-top: 96px; }
+  </style>
 </head>
 
 <body>
-<a class="skip-link" href="#main">Saltar al contenido</a>
+<a class="skip-link" href="#main">Saltar al contenido principal</a>
 
-<header class="site-header">
+<header class="site-header" role="banner">
   <nav class="nav" aria-label="Navegación principal">
-    <a class="brand" href="#top" aria-label="Inicio">
+    <a class="brand" href="#top" aria-label="Ir al inicio">
       <picture class="brand-mark" aria-hidden="true">
         <source srcset="assets/rocio-data-analytics-logo.svg" type="image/svg+xml" />
         <img src="assets/rocio-data-analytics-logo.png" alt="" width="48" height="48"/>
@@ -30,150 +34,400 @@
     </a>
 
     <div class="nav-actions">
+      <a class="nav-link" href="#propuesta">Propuesta</a>
       <a class="nav-link" href="#proyectos">Proyectos</a>
-      <a class="nav-link" href="#metodo">Mi método</a>
-      <a class="nav-link" href="#historia">Historia</a>
+      <a class="nav-link" href="#forma-de-trabajar">Cómo trabajo</a>
+      <a class="nav-link" href="#trayectoria">Trayectoria</a>
       <a class="nav-link" href="#contacto">Contacto</a>
     </div>
   </nav>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
 <!-- HERO -->
-<section id="top" class="section hero">
+<section id="top" class="section hero" aria-labelledby="hero-title">
   <div class="container hero-grid">
 
     <div class="hero-left">
       <p class="eyebrow">Data · Health · Impact</p>
-      <h1 class="h1">
-        Los datos solo tienen valor cuando <span class="accent">cualquier persona</span> puede entenderlos.
+
+      <h1 id="hero-title" class="h1">
+        Entro donde los datos están “regular” y salgo dejando un sistema que se entiende.
       </h1>
 
       <p class="lead">
-        Hago la información clara, útil y accesible para decisiones reales.
+        Soy perfil híbrido (negocio + marketing + datos). Me muevo bien en el barro:
+        definiciones a medias, hojas sueltas, KPIs discutibles, prisas… y aun así hay que decidir.
       </p>
 
-      <div class="cta-row">
+      <ul class="hero-highlights" aria-label="Señales rápidas">
+        <li><strong>Pregunto antes de tocar:</strong> qué significa cada campo y para qué decisión sirve.</li>
+        <li><strong>Dejo rastro:</strong> pasos repetibles, supuestos claros, y cambios explicados.</li>
+        <li><strong>No vendo humo:</strong> si no lo sé, lo digo; si lo puedo aprender rápido, lo demuestro.</li>
+      </ul>
+
+      <div class="cta-row" role="group" aria-label="Acciones principales">
         <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
-        <a class="btn btn-ghost" href="assets/Rocio_Perez_Data_Analyst_CV.pdf" target="_blank">
-          Descargar CV
+        <a class="btn btn-ghost" href="assets/Rocio_Perez_Data_Analyst_CV.pdf" target="_blank" rel="noopener">
+          Descargar CV (PDF)
         </a>
       </div>
+
+      <p class="muted microcopy">
+        Busco <strong>Data Analyst Junior / BI</strong> · Málaga · abierta a remoto/híbrido.
+      </p>
     </div>
 
     <div class="hero-right">
       <figure class="hero-figure hero-figure--profile">
-        <img src="assets/rocio-perez-profile.png"
-             alt="Rocío Pérez — Data Analyst"
-             class="profile-photo">
+        <img
+          src="assets/rocio-perez-profile.png"
+          alt="Rocío Pérez, Data Analyst Junior"
+          class="profile-photo"
+          loading="eager"
+          decoding="async"
+        />
+        <figcaption class="muted microcopy">
+          Me importa que el dashboard sea fácil de leer… y difícil de romper.
+        </figcaption>
       </figure>
     </div>
 
   </div>
 </section>
 
-<!-- PROYECTOS -->
-<section id="proyectos" class="section">
+<!-- PROPUESTA -->
+<section id="propuesta" class="section alt" aria-labelledby="propuesta-title">
   <div class="container">
     <header class="section-head">
-      <h2 class="h2">Proyectos destacados</h2>
+      <h2 id="propuesta-title" class="h2">Mi propuesta, sin postureo</h2>
       <p class="subhead">
-        Casos reales: limpieza, análisis y resultados explicables.
-        <strong>Repositorios en actualización continua con mejoras del bootcamp.</strong>
-      </p>
-    </header>
-
-    <div id="projectsGrid" class="grid"></div>
-  </div>
-</section>
-
-<!-- MI MÉTODO -->
-<section id="metodo" class="section alt">
-  <div class="container">
-    <header class="section-head">
-      <h2 class="h2">Mi método con datos</h2>
-      <p class="subhead">
-        Formación intensiva en Data Analytics aplicada (F5). Finalización: 13 marzo 2026.
-        Aprender datos no es aprender herramientas: es aprender criterio.
+        Lo que me diferencia no es una herramienta. Es cómo pienso cuando el dato viene imperfecto
+        y aun así hay que tomar decisiones con responsabilidad.
       </p>
     </header>
 
     <div class="story-grid">
 
       <article class="card">
-        <h3 class="h3">Mentalidad</h3>
-        <p>EDA antes que modelos. Contexto antes que métricas. Interpretación antes que automatización.</p>
+        <h3 class="h3">Dónde aporto valor rápido</h3>
+        <ul>
+          <li><strong>Definiciones:</strong> convertir “ventas”, “conversión” o “retención” en algo acordado y medible.</li>
+          <li><strong>Orden:</strong> pasar de “archivos y parches” a un flujo que se puede repetir sin miedo.</li>
+          <li><strong>Lectura:</strong> que negocio entienda qué está viendo y qué acción se recomienda.</li>
+        </ul>
       </article>
 
       <article class="card">
-        <h3 class="h3">Proceso</h3>
-        <p>Pipeline completo: cargar → limpiar → transformar → analizar → comunicar.</p>
+        <h3 class="h3">Cómo lo hago</h3>
+        <p>
+          Aterrizo la pregunta, reviso calidad y sentido del dato, y construyo un camino sencillo:
+          cargar → limpiar → transformar → analizar → contar la historia con lo mínimo necesario.
+          Si no puedo explicarlo con calma, no lo cierro.
+        </p>
       </article>
 
       <article class="card">
-        <h3 class="h3">Comunicación</h3>
-        <p>Dashboards claros, storytelling SAB y explicaciones entendibles para negocio.</p>
+        <h3 class="h3">Qué te llevas</h3>
+        <ul>
+          <li>Resultados defendibles (con límites y supuestos visibles).</li>
+          <li>Reporting que se usa, porque responde una pregunta real.</li>
+          <li>Repos/documentación para que el trabajo no dependa “de una persona”.</li>
+        </ul>
+      </article>
+
+    </div>
+
+    <div class="callout" role="note" aria-label="Principio de trabajo">
+      <p class="lead" style="margin:0;">
+        Mi regla interna: <strong>no delego el entendimiento</strong>.
+        Puedo acelerar con herramientas, pero el juicio y la interpretación los asumo yo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos" class="section" aria-labelledby="proyectos-title">
+  <div class="container">
+    <header class="section-head">
+      <h2 id="proyectos-title" class="h2">Proyectos destacados</h2>
+      <p class="subhead">
+        Casos con fricción real: datos irregulares, decisiones explícitas y resultados explicables.
+        <strong>Repos vivos</strong>: los itero con lo aprendido en el bootcamp.
+      </p>
+      <p class="muted microcopy">
+        Si vas con poco tiempo: entra en un proyecto y salta a <strong>Pregunta → Decisiones → Resultado</strong>.
+      </p>
+    </header>
+
+    <div id="projectsGrid" class="grid" aria-live="polite"></div>
+
+    <div class="callout" role="note" aria-label="Cómo cuento mis casos">
+      <h3 class="h3" style="margin-top:0;">Cómo cuento un caso para que se entienda</h3>
+      <ul>
+        <li><strong>Contexto:</strong> qué problema había y por qué importaba.</li>
+        <li><strong>Decisiones:</strong> qué hice, qué descarté y qué riesgo acepté.</li>
+        <li><strong>Salida:</strong> qué cambia mañana con esto (acción, foco, prioridad).</li>
+      </ul>
+      <p class="muted microcopy" style="margin-bottom:0;">
+        Esto es “comunicar” para mí: que se vea el razonamiento, no solo la pantalla final.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO TRABAJO -->
+<section id="forma-de-trabajar" class="section alt" aria-labelledby="forma-title">
+  <div class="container">
+    <header class="section-head">
+      <h2 id="forma-title" class="h2">Cómo trabajo cuando la realidad no viene limpia</h2>
+      <p class="subhead">
+        Empecé el bootcamp creyendo que aprender datos era “dominar herramientas”.
+        Lo acabé con otra idea: aprender datos es entrenar criterio cuando falta tiempo,
+        falta contexto y aun así hay que responder.
+      </p>
+      <p class="muted microcopy">
+        Bootcamp Data Analytics (Factoría F5, 600h). Fin previsto: <strong>13 marzo 2026</strong>.
+      </p>
+    </header>
+
+    <div class="story-grid">
+
+      <article class="card">
+        <h3 class="h3">1) Preguntas que evitan semanas de trabajo</h3>
+        <p>
+          Antes de abrir un notebook: qué se decide con esto, quién lo usa, y qué significa cada KPI.
+          Me da igual parecer “pesada” si eso evita conclusiones equivocadas.
+        </p>
       </article>
 
       <article class="card">
-        <h3 class="h3">Profesionalidad</h3>
-        <p>Git, documentación, seguridad de datos y modelos reproducibles.</p>
+        <h3 class="h3">2) Limpieza con intención</h3>
+        <p>
+          No hay una limpieza “correcta”. Hay una limpieza que respeta el negocio.
+          Por eso documento el porqué de cada cambio y dejo pasos repetibles (Power Query / pipelines).
+        </p>
       </article>
 
       <article class="card">
-        <h3 class="h3">Principio guía</h3>
-        <p><strong>Don’t delegate the knowledge.</strong></p>
+        <h3 class="h3">3) Exploración para detectar trampas</h3>
+        <p>
+          Distribuciones, outliers, relaciones, sesgos, coherencia temporal…
+          Si algo “parece bien” pero no tiene sentido, lo paro y lo reviso.
+        </p>
       </article>
 
       <article class="card">
-        <h3 class="h3">Estado actual</h3>
-        <p>Repositorios vivos: estoy iterando y mejorando con lo aprendido en el bootcamp.</p>
+        <h3 class="h3">4) Soluciones que se puedan mantener</h3>
+        <p>
+          Me gusta lo explicable y lo estable. Prefiero algo útil hoy y mejorable mañana
+          a algo espectacular que nadie sabe sostener.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3 class="h3">5) Reporting que guía</h3>
+        <p>
+          No hago “cuadros bonitos”: hago lectura rápida, comparaciones justas
+          y una historia que termina en recomendación.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3 class="h3">6) Trabajo de equipo sin sustos</h3>
+        <p>
+          Git/GitHub, documentación y cuidado serio con credenciales y datos sensibles.
+          Me tomo muy en serio no dejar bombas para el siguiente.
+        </p>
       </article>
 
     </div>
   </div>
 </section>
 
-<!-- HISTORIA -->
-<section id="historia" class="section">
+<!-- STACK -->
+<section id="stack" class="section" aria-labelledby="stack-title">
   <div class="container">
     <header class="section-head">
-      <h2 class="h2">Historia (clara y con método)</h2>
+      <h2 id="stack-title" class="h2">Herramientas que uso (y cuándo tienen sentido)</h2>
+      <p class="subhead">
+        Esto es lo que ya he aplicado en proyectos completos. Lo importante no es tenerlo en la lista:
+        es saber cuándo usarlo y cuándo no hace falta.
+      </p>
     </header>
 
     <div class="story-grid">
-      <article class="card"><h3 class="h3">Situación</h3><p>Problemas reales, datos imperfectos.</p></article>
-      <article class="card"><h3 class="h3">Acción</h3><p>Limpieza rigurosa y análisis defendible.</p></article>
-      <article class="card"><h3 class="h3">Resultado</h3><p>Insights utilizables.</p></article>
+
+      <article class="card">
+        <h3 class="h3">Análisis y preparación</h3>
+        <ul>
+          <li>Excel avanzado + Power Query (transformaciones repetibles)</li>
+          <li>Python (pandas, numpy), notebooks (Jupyter/Colab), VS Code</li>
+          <li>ETL, pipelines, tipado, optimización y calidad del dato</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3 class="h3">Exploración y estadística</h3>
+        <ul>
+          <li>EDA e interpretación con contexto</li>
+          <li>Estadística aplicada y verificación de supuestos</li>
+          <li>Regresión / clasificación / no supervisado según objetivo</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3 class="h3">BI y comunicación</h3>
+        <ul>
+          <li>Power BI: Power Query, modelo, relaciones, diseño de reporte</li>
+          <li>Modelado en estrella y lógica de negocio</li>
+          <li>Storytelling: contexto → decisiones → beneficio</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3 class="h3">Producto y entrega</h3>
+        <ul>
+          <li>Streamlit: demos tocables para perfiles no técnicos</li>
+          <li>Serialización (pickle/joblib), pre/postprocesado, cache</li>
+          <li>Docker + despliegue (p. ej., Render) para que no dependa de “mi ordenador”</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRAYECTORIA -->
+<section id="trayectoria" class="section alt" aria-labelledby="trayectoria-title">
+  <div class="container">
+    <header class="section-head">
+      <h2 id="trayectoria-title" class="h2">Trayectoria (por qué tengo esta forma de pensar)</h2>
+      <p class="subhead">
+        Mi recorrido mezcla negocio, marketing y entornos educativos/sanitarios.
+        Eso me dejó una manía buena: no doy nada por supuesto.
+      </p>
+    </header>
+
+    <div class="story-grid">
+      <article class="card">
+        <h3 class="h3">Negocio y métricas</h3>
+        <p>
+          He vivido objetivos reales, presión real y decisiones con consecuencias.
+          Por eso me interesa medir bien y explicar mejor.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3 class="h3">Comunicación</h3>
+        <p>
+          Vengo de roles donde “explicar” era parte del trabajo.
+          En datos lo traduzco a: conclusiones entendibles, límites claros, y cero teatro.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3 class="h3">Salud y contexto humano</h3>
+        <p>
+          En salud el dato representa personas. Eso te obliga a ser cuidadosa:
+          privacidad, definiciones y sentido real antes que velocidad.
+        </p>
+      </article>
+    </div>
+
+    <div class="callout" role="note" aria-label="Lo que busco en mi siguiente equipo">
+      <h3 class="h3" style="margin-top:0;">Qué busco (y qué traigo a cambio)</h3>
+
+      <p class="lead" style="margin:0 0 10px 0;">
+        Quiero estar cerca de lo difícil: datos a medias, procesos mejorables, reporting que nadie usa.
+        No porque me encante sufrir, sino porque ahí es donde se aprende de verdad… y donde se nota quién aporta.
+      </p>
+
+      <ul>
+        <li>
+          <strong>Un equipo que tolere preguntas buenas.</strong>
+          Yo pregunto para entender: qué significa cada columna, qué decisión depende de esto, qué riesgo aceptamos.
+        </li>
+        <li>
+          <strong>Espacio para ordenar sin romper.</strong>
+          Me gusta empezar por lo básico bien hecho, y subir nivel con evidencia.
+        </li>
+        <li>
+          <strong>Trabajo cruzado (negocio + técnica).</strong>
+          Soy puente: traduzco necesidades en métricas y problemas técnicos en planes que negocio entiende.
+        </li>
+        <li>
+          <strong>Honestidad operativa.</strong>
+          Prefiero decir “esto tarda X por esto” y entregar algo usable, antes que prometer magia.
+        </li>
+      </ul>
+
+      <p class="muted microcopy" style="margin:10px 0 0 0;">
+        Si tu equipo está intentando recuperar confianza en los datos, ahí me vas a ver cómoda.
+      </p>
     </div>
   </div>
 </section>
 
 <!-- CONTACTO -->
-<section id="contacto" class="section alt">
+<section id="contacto" class="section" aria-labelledby="contacto-title">
   <div class="container">
     <header class="section-head">
-      <h2 class="h2">Contacto</h2>
+      <h2 id="contacto-title" class="h2">Hablemos</h2>
+
+      <p class="subhead">
+        Si estás contratando a alguien junior, pero quieres una persona seria con el dato —que pregunte,
+        documente y no se invente certezas— me encantará conocer vuestro contexto.
+      </p>
+
+      <p class="muted microcopy">
+        Si me cuentas el problema que tenéis ahora mismo (definiciones, calidad, reporting que no se usa),
+        te devuelvo un enfoque claro. Y si no encaja, al menos te llevas una idea útil.
+      </p>
     </header>
 
-    <div class="contact-row">
-      <a class="btn btn-primary" href="https://www.linkedin.com/in/rperezlopez" target="_blank">LinkedIn</a>
-      <a class="btn btn-ghost" href="mailto:rociointhecloud@gmail.com">Email</a>
-      <a class="btn btn-ghost" href="https://github.com/Rociointhecloud" target="_blank">GitHub</a>
-      <a class="btn btn-ghost" href="assets/Rocio_Perez_Data_Analyst_CV.pdf" target="_blank">CV PDF</a>
+    <div class="callout" role="note" aria-label="Desde el primer mes">
+      <h3 class="h3" style="margin-top:0;">Qué puedes esperar de mí desde el primer mes</h3>
+      <ul>
+        <li>Preguntas que aclaran el objetivo antes de mover datos.</li>
+        <li>Pasos reproducibles y decisiones anotadas (para que no se pierda el razonamiento).</li>
+        <li>Comunicación clara de supuestos, límites y riesgos.</li>
+        <li>Iteración rápida sin “romper lo que ya funciona”.</li>
+      </ul>
     </div>
+
+    <div class="contact-row" role="group" aria-label="Enlaces de contacto">
+      <a class="btn btn-primary" href="tel:+34653881191">Llamar: +34 653 881 191</a>
+      <a class="btn btn-ghost" href="mailto:rociointhecloud@gmail.com">Email directo</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/rperezlopez" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="https://github.com/Rociointhecloud" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="assets/Rocio_Perez_Data_Analyst_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+    </div>
+
+    <p class="muted microcopy" style="margin-top:16px;">
+      Base en Málaga · remoto / híbrido · trabajo cómoda en español e inglés (reuniones, documentación y reporting).
+    </p>
   </div>
 </section>
 
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer" role="contentinfo">
   <div class="container footer-inner">
-    <p class="muted">© <span id="year"></span> Rocío Pérez — Data · Health · Impact</p>
+    <p class="muted">
+      © <span id="year"></span> Rocío Pérez — Datos con cabeza, comunicación directa y trabajo que se sostiene.
+    </p>
   </div>
 </footer>
 
 <script src="script.js" defer></script>
+<script>
+  (function () {
+    var el = document.getElementById("year");
+    if (el) el.textContent = String(new Date().getFullYear());
+  })();
+</script>
 </body>
 </html>
