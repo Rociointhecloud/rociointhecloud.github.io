@@ -327,3 +327,42 @@ body[data-mode="tech"] .details .recruiter-only{display:none}
   html{scroll-behavior:auto}
   *{transition:none !important; animation:none !important}
 }
+
+/* =========================
+   HERO PROFILE PHOTO OVERRIDE
+   (evita recorte para foto vertical)
+========================= */
+
+.hero-figure--profile img{
+  aspect-ratio: 1 / 1.414;   /* A-series portrait */
+  object-fit: contain;       /* ✅ NO recorta */
+  background: radial-gradient(
+    600px 380px at 50% 30%,
+    rgba(47,111,94,.22),
+    rgba(18,28,25,.55) 60%,
+    rgba(18,28,25,0) 100%
+  );
+  padding: 18px;
+}
+
+.hero-figure--profile{
+  max-width: 420px;
+  margin-left: auto;
+}
+
+@media (max-width: 920px){
+  .hero-figure--profile{
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .hero-figure--profile img{
+    padding: 14px;
+  }
+}
+
+@media (max-width: 520px){
+  .hero-figure--profile{
+    max-width: 300px;
+  }
+}
+
