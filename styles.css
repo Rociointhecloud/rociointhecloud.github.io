@@ -553,3 +553,76 @@ code{
 @media (max-width: 520px){
   .hero-figure--profile{max-width: 300px;}
 }
+
+/* ==========================================================
+   PATCH: Foto hero + caption + spacing en Herramientas
+========================================================== */
+
+/* 1) Herramientas: como no está dentro de .section, le damos aire */
+#stack-title{
+  margin-top: 64px;
+}
+#stack-title + .subhead{
+  margin-top: 10px;
+  margin-bottom: 18px;
+  max-width: 78ch;
+}
+
+/* 2) HERO profile: layout estable (imagen + caption) */
+.hero-figure--profile{
+  /* si quieres mantener “tarjeta”, pero sin que recorte el caption */
+  overflow: visible;                 /* clave: evita “tapado” */
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  max-width: 420px;
+  margin-left: auto;
+}
+
+/* Creamos una “burbuja” circular para la foto */
+.hero-figure--profile picture{
+  display: block;
+  width: min(360px, 100%);
+  margin-left: auto;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(234,243,240,.14);
+  background:
+    radial-gradient(520px 340px at 50% 30%, rgba(47,111,94,.22), rgba(18,28,25,.60) 60%, rgba(18,28,25,0) 100%),
+    rgba(18,28,25,.55);
+  box-shadow: 0 14px 34px rgba(0,0,0,.38);
+}
+
+/* Hacemos la foto circular y con proporción estable */
+.hero-figure--profile img.profile-photo{
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;     /* círculo real */
+  object-fit: cover;       /* recorta un poco, pero queda pro */
+  border-radius: 999px;    /* por si acaso */
+  padding: 0;              /* importante: fuera padding que “encoge” */
+}
+
+/* Caption legible, no tapado */
+.hero-figure--profile figcaption{
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(234,243,240,.12);
+  background: rgba(18,28,25,.55);
+  font-size: 14px;         /* sube un punto */
+  line-height: 1.45;
+  color: rgba(234,243,240,.78);
+}
+
+/* Responsive: centra en mobile */
+@media (max-width: 920px){
+  .hero-figure--profile{
+    margin: 0 auto;
+    max-width: 360px;
+  }
+  .hero-figure--profile picture{
+    margin: 0 auto;
+  }
+}
