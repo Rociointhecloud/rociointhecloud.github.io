@@ -12,28 +12,138 @@ const CONFIG = Object.freeze({
   ],
   projectNarratives: {
     "happiness-population-internet-data-cleaning": {
-      why: "Cruzar fuentes suena fácil hasta que comparas cosas que no son comparables.",
-      what: "Integración con pandas: normalización de formatos, definición coherente de métricas y proceso reproducible.",
-      outcome: "Dataset consistente, listo para analizar sin trampas de escalas ni definiciones ambiguas."
+      why: {
+        es: "Cruzar fuentes suena fácil hasta que comparas cosas que no son comparables.",
+        en: "Combining sources sounds easy until you compare things that aren’t actually comparable."
+      },
+      what: {
+        es: "Integración con pandas: normalización de formatos, definición coherente de métricas y proceso reproducible.",
+        en: "Pandas integration: format normalization, consistent metrics definitions, and a reproducible process."
+      },
+      outcome: {
+        es: "Dataset consistente, listo para analizar sin trampas de escalas ni definiciones ambiguas.",
+        en: "A consistent dataset, ready for analysis without scale traps or ambiguous definitions."
+      }
     },
     "digital-wellness-etl-pipeline": {
-      why: "Un dashboard no sirve si el pipeline es frágil o depende de quien lo creó.",
-      what: "MySQL → Python → Excel. Claridad de métricas, reglas explícitas y límites documentados.",
-      outcome: "Pipeline reproducible y dashboard usable sin dependencia del autor."
+      why: {
+        es: "Un dashboard no sirve si el pipeline es frágil o depende de quien lo creó.",
+        en: "A dashboard is pointless if the pipeline is fragile or depends on its creator."
+      },
+      what: {
+        es: "MySQL → Python → Excel. Claridad de métricas, reglas explícitas y límites documentados.",
+        en: "MySQL → Python → Excel. Clear metrics, explicit rules, and documented limits."
+      },
+      outcome: {
+        es: "Pipeline reproducible y dashboard usable sin dependencia del autor.",
+        en: "Reproducible pipeline and a usable dashboard without dependency on the author."
+      }
     },
     "clinical-diabetes-risk-glp1-analysis": {
-      why: "En salud, si no se entiende el dato, se usa mal.",
-      what: "EDA + análisis estadístico interpretable con supuestos y sesgos visibles.",
-      outcome: "Conclusiones defendibles y líneas claras para investigación futura."
+      why: {
+        es: "En salud, si no se entiende el dato, se usa mal.",
+        en: "In healthcare, if data isn’t understood, it gets misused."
+      },
+      what: {
+        es: "EDA + análisis estadístico interpretable con supuestos y sesgos visibles.",
+        en: "EDA + interpretable statistical analysis with assumptions and bias made explicit."
+      },
+      outcome: {
+        es: "Conclusiones defendibles y líneas claras para investigación futura.",
+        en: "Defensible conclusions and clear directions for future research."
+      }
     },
     "kiva-microloan-dashboard-excel": {
-      why: "Excel bien estructurado es velocidad con orden cuando hay que decidir rápido.",
-      what: "Power Query + dashboard sobre 42k+ registros con KPIs claros.",
-      outcome: "Lectura de negocio inmediata sin sobrecargar de visuales innecesarios."
+      why: {
+        es: "Excel bien estructurado es velocidad con orden cuando hay que decidir rápido.",
+        en: "Well-structured Excel is speed with order when decisions must be made fast."
+      },
+      what: {
+        es: "Power Query + dashboard sobre 42k+ registros con KPIs claros.",
+        en: "Power Query + dashboard over 42k+ records with clear KPIs."
+      },
+      outcome: {
+        es: "Lectura de negocio inmediata sin sobrecargar de visuales innecesarios.",
+        en: "Immediate business reading without overloading with unnecessary visuals."
+      }
     }
   }
 });
 
+/* ==========================================================
+   I18N (auto por ruta + fallback)
+========================================================== */
+
+function detectLangFromPath() {
+  // Si estás en /en/ o /en/index.html => EN
+  const p = window.location.pathname.toLowerCase();
+  return p.startsWith("/en") ? "en" : "es";
+}
+
+let LANG = detectLangFromPath();
+
+const UI = {
+  es: {
+    loading: "Cargando proyectos…",
+    noProjectsTitle: "No hay proyectos disponibles",
+    noProjectsBody: "Revisa la conexión o el usuario configurado.",
+    errorTitle: "Error al cargar proyectos",
+    updated: "Actualizado:",
+    viewRepo: "Ver repo",
+    demo: "Demo",
+    viewDecisions: "Ver decisiones",
+    hideDecisions: "Ocultar decisiones",
+    why: "Por qué importa:",
+    what: "Qué hice:",
+    outcome: "Resultado:"
+  },
+  en: {
+    loading: "Loading projects…",
+    noProjectsTitle: "No projects available",
+    noProjectsBody: "Check your connection or the configured username.",
+    errorTitle: "Failed to load projects",
+    updated: "Updated:",
+    viewRepo: "View repo",
+    demo: "Demo",
+    viewDecisions: "View decisions",
+    hideDecisions: "Hide decisions",
+    why: "Why it matters:",
+    what: "What I did:",
+    outcome: "Outcome:"
+  }
+};
+
+function t(key) {
+  return (UI[LANG] && UI[LANG][key]) || UI.es[key] || key;
+}
+
+/* ==========================================================
+   NAV: Language buttons => navegan a / o /en/
+========================================================== */
+
+function setupLangSwitch() {
+  const btns = document.querySelectorAll(".lang-btn");
+  if (!btns.length) return;
+
+  const isEn = LANG === "en";
+
+  btns.forEach(btn => {
+    const lang = btn.dataset.lang;
+    const pressed = (lang === "en" && isEn) || (lang === "es" && !isEn);
+    btn.setAttribute("aria-pressed", pressed ? "true" : "false");
+
+    btn.addEventListener("click", () => {
+      if (lang === LANG) return;
+
+      // Mantén la experiencia limpia: redirige, no "traduce" en caliente
+      if (lang === "en") {
+        window.location.href = "/en/";
+      } else {
+        window.location.href = "/";
+      }
+    });
+  });
+}
 
 /* ==========================================================
    HELPERS
@@ -53,15 +163,19 @@ function escapeHtml(str = "") {
 function formatDate(iso) {
   if (!iso) return "—";
   const d = new Date(iso);
-  return d.toLocaleDateString("es-ES", {
+
+  // EN: en-GB suele ser más natural para CV (Feb 2026)
+  const locale = LANG === "en" ? "en-GB" : "es-ES";
+
+  return d.toLocaleDateString(locale, {
     year: "numeric",
     month: "short"
   });
 }
 
 function safeText(text, fallback = "—") {
-  const t = String(text ?? "").trim();
-  return t ? t : fallback;
+  const t0 = String(text ?? "").trim();
+  return t0 ? t0 : fallback;
 }
 
 function detectTags(text = "") {
@@ -73,15 +187,14 @@ function detectTags(text = "") {
   if (/\bexcel\b/.test(hay)) tags.push("Excel");
   if (hay.includes("power query")) tags.push("Power Query");
   if (hay.includes("power bi") || /\bpbi\b/.test(hay)) tags.push("Power BI");
-  if (hay.includes("diabetes") || hay.includes("clinical") || hay.includes("nhs")) tags.push("Salud");
-  if (hay.includes("kiva") || hay.includes("microloan")) tags.push("Impacto");
+  if (hay.includes("diabetes") || hay.includes("clinical") || hay.includes("nhs")) tags.push(LANG === "en" ? "Health" : "Salud");
+  if (hay.includes("kiva") || hay.includes("microloan")) tags.push(LANG === "en" ? "Impact" : "Impacto");
 
   return tags;
 }
 
-
 /* ==========================================================
-   GITHUB API (con timeout + cache en sesión)
+   GITHUB API (timeout + cache en sesión)
 ========================================================== */
 
 async function fetchJSON(url, { timeout = 8000 } = {}) {
@@ -161,19 +274,33 @@ async function loadRepos() {
   return onlyPinned;
 }
 
-
 /* ==========================================================
    RENDER
 ========================================================== */
 
 function narrativeFor(repoName) {
-  return (
-    CONFIG.projectNarratives[repoName] || {
-      why: "Si el dato no se entiende, la decisión será débil.",
-      what: "Limpieza, análisis y decisiones documentadas.",
-      outcome: "Resultado usable con límites visibles."
-    }
-  );
+  const base = CONFIG.projectNarratives[repoName];
+
+  if (base) {
+    return {
+      why: base.why?.[LANG] || base.why?.es || "",
+      what: base.what?.[LANG] || base.what?.es || "",
+      outcome: base.outcome?.[LANG] || base.outcome?.es || ""
+    };
+  }
+
+  // fallback general
+  return LANG === "en"
+    ? {
+        why: "If data isn’t understood, decisions get weaker.",
+        what: "Cleaning, analysis, and documented decisions.",
+        outcome: "A usable result with visible limits."
+      }
+    : {
+        why: "Si el dato no se entiende, la decisión será débil.",
+        what: "Limpieza, análisis y decisiones documentadas.",
+        outcome: "Resultado usable con límites visibles."
+      };
 }
 
 function repoTags(repo) {
@@ -194,15 +321,13 @@ function renderRepoCard(repo, index) {
   const detailsId = `details-${index}`;
 
   const tagsHtml = tags
-    .map(t =>
-      `<span class="tag ${t.brand ? "brand" : ""}">
-        ${escapeHtml(t.label)}
-      </span>`
+    .map(
+      t => `<span class="tag ${t.brand ? "brand" : ""}">${escapeHtml(t.label)}</span>`
     )
     .join("");
 
   const demoBtn = repo.homepage
-    ? `<a class="btn btn-ghost" href="${escapeHtml(repo.homepage)}" target="_blank" rel="noopener noreferrer">Demo</a>`
+    ? `<a class="btn btn-ghost" href="${escapeHtml(repo.homepage)}" target="_blank" rel="noopener noreferrer">${t("demo")}</a>`
     : "";
 
   return `
@@ -215,7 +340,7 @@ function renderRepoCard(repo, index) {
         </h3>
         <div class="card-meta">
           ${tagsHtml}
-          <span class="tag">Actualizado: ${escapeHtml(updated)}</span>
+          <span class="tag">${escapeHtml(t("updated"))} ${escapeHtml(updated)}</span>
         </div>
       </div>
 
@@ -223,29 +348,31 @@ function renderRepoCard(repo, index) {
         ${escapeHtml(
           safeText(
             repo.description,
-            "Proyecto documentado con contexto, decisiones y límites claros."
+            LANG === "en"
+              ? "Project documented with context, decisions, and clear limits."
+              : "Proyecto documentado con contexto, decisiones y límites claros."
           )
         )}
       </p>
 
       <div class="card-actions">
         <a class="btn btn-primary" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noopener noreferrer">
-          Ver repo
+          ${escapeHtml(t("viewRepo"))}
         </a>
         ${demoBtn}
         <button class="btn btn-ghost js-details"
           type="button"
           aria-expanded="false"
           aria-controls="${detailsId}">
-          Ver decisiones
+          ${escapeHtml(t("viewDecisions"))}
         </button>
       </div>
 
       <div class="details" id="${detailsId}" hidden>
         <div class="recruiter-only">
-          <p class="mini"><strong>Por qué importa:</strong> ${escapeHtml(n.why)}</p>
-          <p class="mini"><strong>Qué hice:</strong> ${escapeHtml(n.what)}</p>
-          <p class="mini"><strong>Resultado:</strong> ${escapeHtml(n.outcome)}</p>
+          <p class="mini"><strong>${escapeHtml(t("why"))}</strong> ${escapeHtml(n.why)}</p>
+          <p class="mini"><strong>${escapeHtml(t("what"))}</strong> ${escapeHtml(n.what)}</p>
+          <p class="mini"><strong>${escapeHtml(t("outcome"))}</strong> ${escapeHtml(n.outcome)}</p>
         </div>
       </div>
     </article>
@@ -263,7 +390,7 @@ function wireCardInteractions(root) {
 
     details.toggleAttribute("hidden");
     btn.setAttribute("aria-expanded", String(!open));
-    btn.textContent = open ? "Ver decisiones" : "Ocultar decisiones";
+    btn.textContent = open ? t("viewDecisions") : t("hideDecisions");
   });
 
   root.addEventListener("keydown", e => {
@@ -285,8 +412,8 @@ function renderProjects(repos) {
   if (!repos.length) {
     grid.innerHTML = `
       <div class="card" style="grid-column: span 12;">
-        <h3 class="h3">No hay proyectos disponibles</h3>
-        <p class="muted">Revisa la conexión o el usuario configurado.</p>
+        <h3 class="h3">${escapeHtml(t("noProjectsTitle"))}</h3>
+        <p class="muted">${escapeHtml(t("noProjectsBody"))}</p>
       </div>
     `;
     return;
@@ -296,17 +423,18 @@ function renderProjects(repos) {
   wireCardInteractions(grid);
 }
 
-
 /* ==========================================================
    INIT
 ========================================================== */
 
 async function init() {
+  setupLangSwitch();
+
   const grid = $("#projectsGrid");
   if (grid) {
     grid.innerHTML = `
       <div class="card" style="grid-column: span 12;">
-        <p class="muted">Cargando proyectos…</p>
+        <p class="muted">${escapeHtml(t("loading"))}</p>
       </div>
     `;
   }
@@ -318,7 +446,7 @@ async function init() {
     if (grid) {
       grid.innerHTML = `
         <div class="card" style="grid-column: span 12;">
-          <h3 class="h3">Error al cargar proyectos</h3>
+          <h3 class="h3">${escapeHtml(t("errorTitle"))}</h3>
           <p class="muted">${escapeHtml(err.message)}</p>
         </div>
       `;
