@@ -36,6 +36,12 @@
   /* Motion */
   --ease: cubic-bezier(.2,.9,.2,1);
   --t: 180ms;
+
+  /* UI tiny helpers */
+  --icon: 18px;              /* tamaño iconos en botones */
+  --btn-gap: 10px;           /* separación icono-texto */
+  --pill-bg: rgba(234,243,240,.06);
+  --pill-border: rgba(234,243,240,.14);
 }
 
 *{box-sizing:border-box}
@@ -570,4 +576,32 @@ code{
   .hero-figure--profile img.profile-photo{
     margin: 0 auto;
   }
+}
+
+/* ==========================================================
+   Contact polish (icon buttons + microcopy pill)
+========================================================== */
+
+/* Botones con icono (SVG inline) */
+.btn svg{
+  width: var(--icon);
+  height: var(--icon);
+  flex: 0 0 auto;
+}
+
+/* Separación icono-texto */
+.btn{
+  gap: var(--btn-gap);
+}
+
+/* Microcopy tipo badge (< 24h) */
+.contact-note{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+  padding:8px 10px;
+  border-radius:999px;
+  background: var(--pill-bg);
+  border:1px solid var(--pill-border);
 }
