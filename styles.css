@@ -121,21 +121,28 @@ code{
   z-index:20;
 }
 .nav{
-  display:flex; align-items:center; justify-content:space-between;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   gap:16px;
   padding:14px 0;
 }
 
+/* para que en móvil no se rompa el header */
+@media (max-width: 700px){
+  .nav{flex-wrap:wrap}
+}
+
 /* Brand */
 .brand{
-  display:inline-flex;
+  display:flex;
   align-items:center;
   gap:10px;
   text-decoration:none;
   font-weight:800;
   letter-spacing:.2px;
 
-  /* ✅ añadido: evita que el wordmark rompa el layout */
+  /* evita overflow del wordmark */
   flex: 0 1 auto;
   min-width: 0;
 }
@@ -172,13 +179,20 @@ code{
   transform: translateY(-1px);
 }
 
-/* ✅ añadido: estilos del wordmark */
+/* ✅ Wordmark: controlado por HEIGHT (más estable entre ES/EN) */
 .brand-wordmark{
   display:block;
-  width: 220px;     /* desktop */
-  height: auto;
-  max-width: 42vw;  /* no invade nav */
-  opacity: .96;
+  height: 26px;
+  width:auto;
+  max-width: 240px;   /* evita invadir el menú */
+  opacity:.96;
+}
+
+@media (min-width: 980px){
+  .brand-wordmark{
+    height: 28px;
+    max-width: 280px;
+  }
 }
 
 @media (max-width: 520px){
@@ -188,19 +202,19 @@ code{
     height:40px;
   }
 
-  /* ✅ añadido: wordmark más pequeño en móvil */
   .brand-wordmark{
-    width: 170px;
-    max-width: 58vw;
+    height: 20px;
+    max-width: 170px;
   }
 }
 
-/* ✅ opcional recomendado: si en móvil se aprieta, deja que el nav haga wrap */
-@media (max-width: 700px){
-  .nav{flex-wrap:wrap}
+.nav-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:14px;
+  flex-wrap:wrap;
 }
-
-.nav-actions{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
 
 .nav-link{
   text-decoration:none;
