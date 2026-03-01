@@ -42,6 +42,10 @@
   --btn-gap: 10px;           /* separación icono-texto */
   --pill-bg: rgba(234,243,240,.06);
   --pill-border: rgba(234,243,240,.14);
+
+  /* Header sizing helpers */
+  --header-pad-y: 14px;      /* mantiene tus márgenes del header */
+  --header-min-h: 76px;      /* “altura objetivo” del header (estable) */
 }
 
 *{box-sizing:border-box}
@@ -120,12 +124,16 @@ code{
   border-bottom:1px solid var(--line);
   z-index:20;
 }
+
 .nav{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:16px;
-  padding:14px 0;
+
+  /* mantiene tu “look” pero estabiliza altura para que el wordmark pueda crecer */
+  padding: var(--header-pad-y) 0;
+  min-height: var(--header-min-h);
 }
 
 /* para que en móvil no se rompa el header */
@@ -136,16 +144,18 @@ code{
 /* Brand */
 .brand{
   display:flex;
-  align-items:center;
-  gap:10px;
+  align-items:center;     /* centra verticalmente logo + wordmark */
+  gap:12px;
   text-decoration:none;
   font-weight:800;
   letter-spacing:.2px;
 
-  /* evita overflow del wordmark */
+  /* permite que el wordmark crezca sin “reventar” el layout */
   flex: 0 1 auto;
   min-width: 0;
+  max-width: 52%;         /* clave: deja espacio real al menú */
 }
+
 .brand:focus{
   outline:none;
   box-shadow: var(--focus);
@@ -179,22 +189,30 @@ code{
   transform: translateY(-1px);
 }
 
-/* ✅ Wordmark: controlado por HEIGHT (más estable entre ES/EN) */
+/* ✅ WORDMARK MAX: crece hasta el límite del espacio disponible */
 .brand-wordmark{
   display:block;
-  height: 26px;
   width:auto;
-  max-width: 240px;   /* evita invadir el menú */
+  height: min(44px, calc(var(--header-min-h) - (var(--header-pad-y) * 2))); /* grande pero sin comerse el header */
+  max-width: 100%;       /* usa TODO el ancho disponible dentro de .brand */
   opacity:.96;
+
+  /* “centrado” visual en su cajita */
+  margin: 0;
+  transform: translateY(0.5px);
 }
 
+/* Desktop: más grande todavía (mientras haya espacio) */
 @media (min-width: 980px){
+  .brand{
+    max-width: 56%;
+  }
   .brand-wordmark{
-    height: 28px;
-    max-width: 280px;
+    height: min(52px, calc(var(--header-min-h) - (var(--header-pad-y) * 2)));
   }
 }
 
+/* Mobile: prioriza no romper layout, pero sigue grande */
 @media (max-width: 520px){
   .brand-mark,
   .brand-mark img{
@@ -202,18 +220,27 @@ code{
     height:40px;
   }
 
+  .brand{
+    max-width: 100%;
+  }
+
   .brand-wordmark{
-    height: 20px;
-    max-width: 170px;
+    height: 32px;     /* grande en móvil */
+    max-width: 78vw;  /* evita invadir el switch */
   }
 }
 
+/* Nav actions */
 .nav-actions{
   display:flex;
   align-items:center;
   justify-content:flex-end;
   gap:14px;
   flex-wrap:wrap;
+
+  /* permite encoger (si no, puede “aplastar” el logo) */
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .nav-link{
@@ -279,7 +306,6 @@ code{
   background: linear-gradient(180deg, rgba(61,138,117,.95), rgba(47,111,94,.92));
   border-color: rgba(47,111,94,.35);
 }
-
 @media (min-width: 980px){
   .lang-hint{display:inline}
 }
