@@ -134,6 +134,10 @@ code{
   text-decoration:none;
   font-weight:800;
   letter-spacing:.2px;
+
+  /* ✅ añadido: evita que el wordmark rompa el layout */
+  flex: 0 1 auto;
+  min-width: 0;
 }
 .brand:focus{
   outline:none;
@@ -168,12 +172,32 @@ code{
   transform: translateY(-1px);
 }
 
+/* ✅ añadido: estilos del wordmark */
+.brand-wordmark{
+  display:block;
+  width: 220px;     /* desktop */
+  height: auto;
+  max-width: 42vw;  /* no invade nav */
+  opacity: .96;
+}
+
 @media (max-width: 520px){
   .brand-mark,
   .brand-mark img{
     width:40px;
     height:40px;
   }
+
+  /* ✅ añadido: wordmark más pequeño en móvil */
+  .brand-wordmark{
+    width: 170px;
+    max-width: 58vw;
+  }
+}
+
+/* ✅ opcional recomendado: si en móvil se aprieta, deja que el nav haga wrap */
+@media (max-width: 700px){
+  .nav{flex-wrap:wrap}
 }
 
 .nav-actions{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
